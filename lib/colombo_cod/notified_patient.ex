@@ -1,4 +1,6 @@
 defmodule ColomboCodModule.NotifiedPatient do
+  @moduledoc false
+
   use Ecto.Schema
   import Ecto.Changeset
 
@@ -8,6 +10,7 @@ defmodule ColomboCodModule.NotifiedPatient do
     timestamps()
   end
 
+  # TODO: Check how we can format input data
   @doc false
   def changeset(notified_patient, attrs) do
     notified_patient

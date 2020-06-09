@@ -6,7 +6,17 @@ To start your PostgreSQL database:
 
     * Install docker (https://docs.docker.com/get-docker/)
     * Install docker-compose (https://docs.docker.com/compose/install/)
-    * Run in project root `$ docker-compose up` 
+    * Run `docker-compose up`
+
+To run pending migrations:
+    
+    * Run `mix ecto.migrate`
+    
+To populate sample data:
+    
+    * Run `mix run priv/repo/seeds.exs`
+
+# Server 
 
 To start your Phoenix server:
 

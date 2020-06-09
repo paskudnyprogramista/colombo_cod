@@ -9,3 +9,33 @@
 #
 # We recommend using the bang functions (`insert!`, `update!`
 # and so on) as they will fail if something goes wrong.
+
+ColomboCodModule.Repo.insert!(
+  %ColomboCodModule.Patient{
+    first_name: "Louis",
+    last_name: "Wain",
+    phone: "186001939"
+  }
+)
+
+ColomboCodModule.Repo.insert!(
+  %ColomboCodModule.Patient{
+    first_name: "Edvard",
+    last_name: "Munch",
+    phone: "186301944"
+  }
+)
+
+ColomboCodModule.Repo.insert!(
+  %ColomboCodModule.Patient{
+    first_name: "Francisco",
+    last_name: "de Goya",
+    phone: "174601828"
+  }
+)
+
+ColomboCodModule.Repo.insert!(
+  %ColomboCodModule.NotifiedPatient{
+    phone: "186301944"
+  }
+)
