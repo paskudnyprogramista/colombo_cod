@@ -1,4 +1,12 @@
-# ColomboCodModule
+# Colombo Cod
+
+# Database
+
+To start your PostgreSQL database:
+
+    * Install docker (https://docs.docker.com/get-docker/)
+    * Install docker-compose (https://docs.docker.com/compose/install/)
+    * Run in project root `$ docker-compose up` 
 
 To start your Phoenix server:
 
@@ -7,13 +15,3 @@ To start your Phoenix server:
   * Start Phoenix endpoint with `mix phx.server`
 
 Now you can visit [`localhost:4000`](http://localhost:4000) from your browser.
-
-Ready to run in production? Please [check our deployment guides](https://hexdocs.pm/phoenix/deployment.html).
-
-## Learn more
-
-  * Official website: https://www.phoenixframework.org/
-  * Guides: https://hexdocs.pm/phoenix/overview.html
-  * Docs: https://hexdocs.pm/phoenix
-  * Forum: https://elixirforum.com/c/phoenix-forum
-  * Source: https://github.com/phoenixframework/phoenix
