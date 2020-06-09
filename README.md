@@ -9,9 +9,8 @@ To start your PostgreSQL database:
 * Run `docker-compose up`
 
 To run pending migrations:
-    
 * Run `mix ecto.migrate`
-    
+
 To populate sample data:
     
 * Run `mix run priv/repo/seeds.exs`
@@ -25,3 +24,9 @@ To start your Phoenix server:
 * Start Phoenix endpoint with `mix phx.server`
 
 Now you can visit [`localhost:4000`](http://localhost:4000) from your browser.
+
+## Test
+
+To run tests:
+
+* Run `mix test`
