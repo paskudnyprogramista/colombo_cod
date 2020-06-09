@@ -34,6 +34,8 @@ defmodule ColomboCodModule.Workers.NotifyPatientsWorker do
     # TODO: Load only those patients which needs to be notified
 
     Repo.all(ColomboCodModule.Patient)
+    |> Repo.preload(patient_invitation_notification: :patient)
+    |> Enum.each(&NotifyPatientService.call/1)
   end
   
   defp schedule_worker do

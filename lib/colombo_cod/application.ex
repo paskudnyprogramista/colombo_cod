@@ -17,7 +17,7 @@ defmodule ColomboCodModule.Application do
       ColomboCodModuleWeb.Endpoint,
       # Start a worker by calling: ColomboCodModule.Worker.start_link(arg)
       # {ColomboCodModule.Worker, arg}
-      ColomboCodModule.Workers.PatientsNotification
+      ColomboCodModule.Workers.NotifyPatientsWorker
     ]
 
     # See https://hexdocs.pm/elixir/Supervisor.html
@@ -31,6 +31,7 @@ defmodule ColomboCodModule.Application do
   # whenever the application is updated.
   def config_change(changed, _new, removed) do
     ColomboCodModuleWeb.Endpoint.config_change(changed, removed)
+
     :ok
   end
 end

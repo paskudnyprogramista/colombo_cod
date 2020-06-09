@@ -9,6 +9,8 @@ defmodule ColomboCodModule.Patient do
     field :last_name, :string
     field :phone, :string
 
+    has_one :patient_invitation_notification, ColomboCodModule.PatientInvitationNotification
+
     timestamps()
   end
 

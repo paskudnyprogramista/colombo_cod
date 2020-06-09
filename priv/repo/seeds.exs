@@ -35,7 +35,8 @@ ColomboCodModule.Repo.insert!(
 )
 
 ColomboCodModule.Repo.insert!(
-  %ColomboCodModule.NotifiedPatient{
-    phone: "186301944"
+  %ColomboCodModule.PatientInvitationNotification{
+    phone: "186301944",
+    patient_id: 2
   }
 )
