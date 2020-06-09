@@ -14,14 +14,16 @@ defmodule ColomboCodModule.Application do
       # Start the PubSub system
       {Phoenix.PubSub, name: ColomboCodModule.PubSub},
       # Start the Endpoint (http/https)
-      ColomboCodModuleWeb.Endpoint
+      ColomboCodModuleWeb.Endpoint,
       # Start a worker by calling: ColomboCodModule.Worker.start_link(arg)
       # {ColomboCodModule.Worker, arg}
+      ColomboCodModule.Workers.PatientsNotification
     ]
 
     # See https://hexdocs.pm/elixir/Supervisor.html
     # for other strategies and supported options
     opts = [strategy: :one_for_one, name: ColomboCodModule.Supervisor]
+
     Supervisor.start_link(children, opts)
   end
 
