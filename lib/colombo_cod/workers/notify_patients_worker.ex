@@ -5,6 +5,7 @@ defmodule ColomboCodModule.Workers.NotifyPatientsWorker do
 
   alias ColomboCodModule.Services.NotifyPatientService, as: NotifyPatientService
   alias ColomboCodModule.Repo, as: Repo
+  alias ColomboCodModule.Queries.PatientQuery, as: PatientQuery
 
   # TODO: Change interval to 300_000
   @interval 3_600
@@ -30,11 +31,8 @@ defmodule ColomboCodModule.Workers.NotifyPatientsWorker do
   end
 
   defp notify_patients do
-    # TODO: Check if there's a better way to send patients to service
-    # TODO: Load only those patients which needs to be notified
-
-    Repo.all(ColomboCodModule.Patient)
-    |> Repo.preload(patient_invitation_notification: :patient)
+    PatientQuery.not_welcomed()
+    |> Repo.all
     |> Enum.each(&NotifyPatientService.call/1)
   end
   
