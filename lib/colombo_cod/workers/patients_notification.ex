@@ -30,6 +30,7 @@ defmodule ColomboCodModule.Workers.PatientsNotification do
 
   defp notify_patients do
     # TODO: Check if there's a better way to send patients to service
+    # TODO: Load only those patients which needs to be notified
     ColomboCodModule.Repo.all(ColomboCodModule.Patient)
     |> Enum.each(&NotifyPatientService.call/1)
   end
