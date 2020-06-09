@@ -8,12 +8,8 @@ To start your PostgreSQL database:
 * Install docker-compose (https://docs.docker.com/compose/install/)
 * Run `docker-compose up`
 
-To run pending migrations:
-* Run `mix ecto.migrate`
-
-To populate sample data:
-    
-* Run `mix run priv/repo/seeds.exs`
+To create database, run pending migrations and populate sample data:
+* Run `mix ecto.setup`
 
 ## Server 
 
