@@ -3,6 +3,8 @@ defmodule ColomboCodModule.Workers.PatientsNotification do
 
   use GenServer
 
+  alias ColomboCodModule.Services.NotifyPatientService, as: NotifyPatientService
+
   # TODO: Change interval to 300_000
   @interval 3_600
 
@@ -27,7 +29,9 @@ defmodule ColomboCodModule.Workers.PatientsNotification do
   end
 
   defp notify_patients do
-    # TODO: Impl
+    # TODO: Check if there's a better way to send patients to service
+    ColomboCodModule.Repo.all(ColomboCodModule.Patient)
+    |> Enum.each(&NotifyPatientService.call/1)
   end
   
   defp schedule_worker do
