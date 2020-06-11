@@ -1,17 +1,24 @@
 defmodule ColomboCodModule.Services.NotifyPatientService do
   @moduledoc false
+  import Ecto.Query
 
   def call(patient) do
-    # TODO: Guard against sending message twice
+    result = ColomboCodModule.Repo.exists?(
+      from pin in ColomboCodModule.PatientInvitationNotification, where: pin.phone == ^patient.phone
+    )
 
-    Task.start(fn -> persist_patient_invitation_notification(patient) end)
-    Task.start(fn -> notify(patient) end)
+    if result do
+      {:ko, :unprocessable}
+    else
+      Task.start(fn -> persist_patient_invitation_notification(patient) end)
+      Task.start(fn -> notify(patient) end)
+
+      {:ok, :processed}
+    end
   end
 
   defp notify(patient) do
-    IO.puts("Send SMS to: #{patient.phone}")
-
-    {:ok, :sent}
+    {:ok, :sent, patient.phone}
   end
 
   defp persist_patient_invitation_notification(patient) do
