@@ -6,25 +6,34 @@ defmodule ColomboCodModule.Workers.NotifyPatientsServiceTest do
 
   import ColomboCodModule.Factory
 
-  describe "call/1" do
-    test "spawns notify process" do
-      # TODO: Impl
+  setup do
+    patient = insert(:patient)
 
-      assert :ko = :ok
+    %{patient: patient}
+  end
+
+  describe "call/1" do
+    test "spawns notify process", %{patient: patient} do
+      result = ColomboCodModule.Services.NotifyPatientService.call(patient)
+
+      notify_pid = result |> elem(3)
+
+      assert is_pid(notify_pid)
     end
 
-    test "spawns persist_patient_invitation_notification process" do
-      # TODO: Impl
+    test "spawns persist_patient_invitation_notification process", %{patient: patient} do
+      result = ColomboCodModule.Services.NotifyPatientService.call(patient)
 
-      assert :ko = :ok
+      persist_pid = result |> elem(2)
+
+      assert is_pid(persist_pid)
     end
   end
 
   describe "persist_patient_invitation_notification/1" do
-    test "when invitation SMS was sent it does not insert new record" do
+    test "when invitation SMS was sent it does not insert new record", %{patient: patient} do
       # We deliberately don't insert patient with associated patient_invitation_notification
       # Because we want to test, how system behave when patient data was destroyed
-      patient = insert(:patient)
       patient_invitation_notification = insert(:patient_invitation_notification, %{phone: patient.phone})
 
       result = ColomboCodModule.Services.NotifyPatientService.call(patient)
@@ -32,9 +41,7 @@ defmodule ColomboCodModule.Workers.NotifyPatientsServiceTest do
       assert {:ko, :unprocessable} == result
     end
 
-    test "when invitation SMS was not sent it insert new record" do
-      patient = insert(:patient)
-
+    test "when invitation SMS was not sent it insert new record", %{patient: patient} do
       result = ColomboCodModule.Services.NotifyPatientService.call(patient)
 
       persist_pid = result |> elem(2)
