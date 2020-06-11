@@ -20,3 +20,5 @@ config :colombo_cod, ColomboCodModuleWeb.Endpoint,
 
 # Print only warnings and errors during test
 config :logger, level: :warn
+
+config :colombo_cod, :patient_notification_worker_interval, 3_600 

@@ -7,7 +7,7 @@ defmodule ColomboCodModule.Workers.NotifyPatientsWorker do
   alias ColomboCodModule.Repo, as: Repo
   alias ColomboCodModule.Queries.PatientQuery, as: PatientQuery
 
-  @interval 300_000
+  @interval Application.get_env(:colombo_cod, :patient_notification_worker_interval)
 
   def start_link(_) do
     GenServer.start_link(__MODULE__, :ok, name: __MODULE__)
@@ -36,8 +36,6 @@ defmodule ColomboCodModule.Workers.NotifyPatientsWorker do
   end
   
   defp schedule_worker do
-    if Mix.env() != :test do
-      Process.send_after(self(), :work, @interval)
-    end
+    Process.send_after(self(), :work, @interval)
   end
 end

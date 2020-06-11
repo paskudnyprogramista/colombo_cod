@@ -55,3 +55,5 @@ config :phoenix, :stacktrace_depth, 20
 
 # Initialize plugs at runtime for faster development compilation
 config :phoenix, :plug_init_mode, :runtime
+
+config :colombo_cod, :patient_notification_worker_interval, 300_000
