@@ -2,12 +2,16 @@ defmodule ColomboCodModule.Services.NotifyPatientService do
   @moduledoc false
 
   def call(patient) do
+    # TODO: Guard against sending message twice
+
     Task.start(fn -> persist_patient_invitation_notification(patient) end)
     Task.start(fn -> notify(patient) end)
   end
 
   defp notify(patient) do
     IO.puts("Send SMS to: #{patient.phone}")
+
+    {:ok, :sent}
   end
 
   defp persist_patient_invitation_notification(patient) do
