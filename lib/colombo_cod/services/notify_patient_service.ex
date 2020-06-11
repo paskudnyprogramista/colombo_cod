@@ -10,10 +10,10 @@ defmodule ColomboCodModule.Services.NotifyPatientService do
     if result do
       {:ko, :unprocessable}
     else
-      Task.start(fn -> persist_patient_invitation_notification(patient) end)
-      Task.start(fn -> notify(patient) end)
+      {_, persist_pid} = Task.start(fn -> persist_patient_invitation_notification(patient) end)
+      {_, notify_pid} = Task.start(fn -> notify(patient) end)
 
-      {:ok, :processed}
+      {:ok, :processed, persist_pid, notify_pid}
     end
   end
 
