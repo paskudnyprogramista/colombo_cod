@@ -3,5 +3,6 @@ defmodule ColomboCodModule.Factory do
 
   use ExMachina.Ecto, repo: ColomboCodModule.Repo
 
-  use ColomboCodModule.PatientFactory
+  use ColomboCodModule.Factories.PatientFactory
+  use ColomboCodModule.Factories.PatientInvitationNotificationFactory
 end

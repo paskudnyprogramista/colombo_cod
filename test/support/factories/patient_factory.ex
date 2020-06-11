@@ -1,4 +1,4 @@
-defmodule ColomboCodModule.PatientFactory do
+defmodule ColomboCodModule.Factories.PatientFactory do
   @moduledoc false
 
   defmacro __using__(_opts) do
