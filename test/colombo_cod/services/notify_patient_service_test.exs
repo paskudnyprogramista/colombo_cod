@@ -10,13 +10,13 @@ defmodule ColomboCodModule.Workers.NotifyPatientsServiceTest do
     test "spawns notify process" do
       # TODO: Impl
 
-      assert :ko == :ok
+      assert :ko = :ok
     end
 
     test "spawns persist_patient_invitation_notification process" do
       # TODO: Impl
 
-      assert :ko == :ok
+      assert :ko = :ok
     end
   end
 
@@ -28,8 +28,6 @@ defmodule ColomboCodModule.Workers.NotifyPatientsServiceTest do
       patient_invitation_notification = insert(:patient_invitation_notification, %{phone: patient.phone})
 
       result = ColomboCodModule.Services.NotifyPatientService.call(patient)
-
-      # TODO: Impl testing if nothing was inserted to db
       
       assert {:ko, :unprocessable} == result
     end
@@ -39,9 +37,21 @@ defmodule ColomboCodModule.Workers.NotifyPatientsServiceTest do
 
       result = ColomboCodModule.Services.NotifyPatientService.call(patient)
 
-      # TODO: Impl testing if record was inserted to db
+      persist_pid = result |> elem(2)
 
-      assert {:ok, :processed} == result
+      ref = Process.monitor(persist_pid)
+
+      # TODO: Refactor this test to be Elixir like one
+      counts = receive do
+        {:DOWN, ^ref, _, _, _} ->
+          {
+            ColomboCodModule.Repo.all(ColomboCodModule.Patient) |> Enum.count,
+            ColomboCodModule.Repo.all(ColomboCodModule.PatientInvitationNotification) |> Enum.count
+          }
+      end
+
+      assert {1, 1} = counts
+      assert {:ok, :processed, _, _} = result
     end
   end
 end
