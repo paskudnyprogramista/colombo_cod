@@ -3,9 +3,11 @@ defmodule ColomboCodModule.Services.NotifyPatientService do
   import Ecto.Query
 
   def call(patient) do
-    result = ColomboCodModule.Repo.exists?(
-      from pin in ColomboCodModule.PatientInvitationNotification, where: pin.phone == ^patient.phone
-    )
+    result =
+      ColomboCodModule.Repo.exists?(
+        from pin in ColomboCodModule.PatientInvitationNotification,
+          where: pin.phone == ^patient.phone
+      )
 
     if result do
       {:ko, :unprocessable}

@@ -7,7 +7,7 @@ defmodule ColomboCodModule.Factories.PatientFactory do
         %ColomboCodModule.Patient{
           first_name: "Test",
           last_name: "Testowy",
-          phone: sequence(:phone, &"123321#{&1}"),
+          phone: sequence(:phone, &"123321#{&1}")
         }
       end
     end

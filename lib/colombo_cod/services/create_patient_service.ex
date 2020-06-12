@@ -12,6 +12,6 @@ defmodule ColomboCodModule.Services.CreatePatientService do
     # Else
     # Do nothing
 
-    Multi.new
+    Multi.new()
   end
 end

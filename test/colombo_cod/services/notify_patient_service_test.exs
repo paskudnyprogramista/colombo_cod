@@ -34,10 +34,11 @@ defmodule ColomboCodModule.Workers.NotifyPatientsServiceTest do
     test "when invitation SMS was sent it does not insert new record", %{patient: patient} do
       # We deliberately don't insert patient with associated patient_invitation_notification
       # Because we want to test, how system behave when patient data was destroyed
-      patient_invitation_notification = insert(:patient_invitation_notification, %{phone: patient.phone})
+      patient_invitation_notification =
+        insert(:patient_invitation_notification, %{phone: patient.phone})
 
       result = ColomboCodModule.Services.NotifyPatientService.call(patient)
-      
+
       assert {:ko, :unprocessable} == result
     end
 
@@ -49,13 +50,15 @@ defmodule ColomboCodModule.Workers.NotifyPatientsServiceTest do
       ref = Process.monitor(persist_pid)
 
       # TODO: Refactor this test to be Elixir like one
-      counts = receive do
-        {:DOWN, ^ref, _, _, _} ->
-          {
-            ColomboCodModule.Repo.all(ColomboCodModule.Patient) |> Enum.count,
-            ColomboCodModule.Repo.all(ColomboCodModule.PatientInvitationNotification) |> Enum.count
-          }
-      end
+      counts =
+        receive do
+          {:DOWN, ^ref, _, _, _} ->
+            {
+              ColomboCodModule.Repo.all(ColomboCodModule.Patient) |> Enum.count(),
+              ColomboCodModule.Repo.all(ColomboCodModule.PatientInvitationNotification)
+              |> Enum.count()
+            }
+        end
 
       assert {1, 1} = counts
       assert {:ok, :processed, _, _} = result

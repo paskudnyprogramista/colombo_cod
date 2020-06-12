@@ -5,7 +5,7 @@ defmodule ColomboCodModule.Factories.PatientInvitationNotificationFactory do
     quote do
       def patient_invitation_notification_factory do
         %ColomboCodModule.PatientInvitationNotification{
-          phone: sequence(:phone, &"123321#{&1}"),
+          phone: sequence(:phone, &"123321#{&1}")
         }
       end
     end

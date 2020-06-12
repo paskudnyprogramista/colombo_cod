@@ -31,10 +31,10 @@ defmodule ColomboCodModule.Workers.NotifyPatientsWorker do
 
   defp notify_patients do
     PatientQuery.not_welcomed()
-    |> Repo.all
+    |> Repo.all()
     |> Enum.each(&NotifyPatientService.call/1)
   end
-  
+
   defp schedule_worker do
     Process.send_after(self(), :work, @interval)
   end

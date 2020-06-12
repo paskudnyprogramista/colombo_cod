@@ -12,11 +12,5 @@ defmodule ColomboCodModule.Workers.NotifyPatientsWorkerTest do
 
       assert_receive {:trace, ^worker_pid, :receive, :work}, 3_600
     end
-
-    test "returns {:noreply, :ok} tuple" do
-      # TODO: Check if it's possible to get 
-      
-      assert :ko == :ok
-    end
   end
 end
