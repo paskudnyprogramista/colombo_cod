@@ -33,11 +33,6 @@ defmodule ColomboCodModule.Workers.NotifyPatientsWorker do
     {:noreply, state}
   end
 
-  @doc """
-  This function is responsible for passing patients to notification service.
-
-  It will pass only those patints who did not receive invitation SMS.
-  """
   defp notify_patients do
     PatientQuery.not_welcomed()
     |> Repo.all()

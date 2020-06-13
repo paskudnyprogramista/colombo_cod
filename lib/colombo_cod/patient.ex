@@ -11,7 +11,8 @@ defmodule ColomboCodModule.Patient do
     field :last_name, :string
     field :phone, :string
 
-    has_one :patient_invitation_notification, ColomboCodModule.PatientInvitationNotification, on_delete: :nilify_all
+    has_one :patient_invitation_notification, ColomboCodModule.PatientInvitationNotification,
+      on_delete: :nilify_all
 
     timestamps()
   end
