@@ -1,5 +1,11 @@
 defmodule ColomboCodModule.Services.CreatePatientService do
-  @moduledoc false
+  @moduledoc """
+  CreatePatientService is responsible for FINDING or CREATING patients.
+
+  Patient recrod can be deleted from database, but information regarding invitation SMS not - at least not in normal usage.
+
+  In such case, service will check if we can link patient with invitatioin notifications records.
+  """
 
   def call(patient_changeset) do
     # TODO: Impl

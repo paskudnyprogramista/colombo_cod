@@ -1,5 +1,7 @@
 defmodule ColomboCodModule.PatientInvitationNotification do
-  @moduledoc false
+  @moduledoc """
+  This is the PatientInvitationNotification module which defines PatientInvitationNotification schema and changeset macro.
+  """
 
   use Ecto.Schema
   import Ecto.Changeset

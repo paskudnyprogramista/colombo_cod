@@ -1,5 +1,7 @@
 defmodule ColomboCodModule.Patient do
-  @moduledoc false
+  @moduledoc """
+  This is the Patient module which defines Patient schema and changeset macro.
+  """
 
   use Ecto.Schema
   import Ecto.Changeset

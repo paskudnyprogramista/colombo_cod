@@ -1,5 +1,8 @@
 defmodule ColomboCodModule.Services.NotifyPatientService do
-  @moduledoc false
+  @moduledoc """
+  NotifyPatientService is responsible for persisting invitation notifications in database and send SMS to patients.
+  """
+
   import Ecto.Query
 
   def call(patient) do
@@ -19,10 +22,16 @@ defmodule ColomboCodModule.Services.NotifyPatientService do
     end
   end
 
+  @doc """
+  Call external service responsible for sending SMS to patients.
+  """
   defp notify(patient) do
     {:ok, :sent, patient.phone}
   end
 
+  @doc """
+  Persist information in patient_invitation_notification with patient phone number.
+  """
   defp persist_patient_invitation_notification(patient) do
     Ecto.build_assoc(patient, :patient_invitation_notification)
     |> Ecto.Changeset.change(phone: patient.phone)
