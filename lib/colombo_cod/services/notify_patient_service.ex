@@ -5,6 +5,7 @@ defmodule ColomboCodModule.Services.NotifyPatientService do
 
   import Ecto.Query
 
+  @spec call(%ColomboCodModule.Patient{}) :: tuple
   def call(patient) do
     result =
       ColomboCodModule.Repo.exists?(
@@ -22,10 +23,12 @@ defmodule ColomboCodModule.Services.NotifyPatientService do
     end
   end
 
+  @spec notify(%ColomboCodModule.Patient{}) :: tuple
   defp notify(patient) do
     {:ok, :sent, patient.phone}
   end
 
+  @spec persist_patient_invitation_notification(%ColomboCodModule.Patient{}) :: Ecto.Schema.t()
   defp persist_patient_invitation_notification(patient) do
     Ecto.build_assoc(patient, :patient_invitation_notification)
     |> Ecto.Changeset.change(phone: patient.phone)
